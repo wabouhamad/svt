@@ -13,3 +13,5 @@
     - atomic-openshift-dockerregistry
     - tuned-profiles-atomic
     - tuned-profiles-atomic-openshift-node
+    - atomic-openshift-docker-excluder
+    - atomic-openshift-excluder

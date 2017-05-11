@@ -2,10 +2,17 @@
 - name: yum update
   yum: name=* state=latest
 
+- name: install ansible from aos.repo
+  yum:
+    name: ansible
+    disablerepo: epel
+    enablerepo: aos
+    state: present
+
 - name: install packages
   yum: name={{ item }} state=latest
   with_items:
-    - ansible
+##    - ansible
     - bind-utils
     - blktrace
     - ethtool
