@@ -16,6 +16,20 @@
         group: root 
         mode: 0644
   when: atomic | default(False) | bool
+
+##--- walid added more debugs: ---------------------
+- name: DEBUG Walid added cat /etc/fstab command
+  command: cat /etc/fstab
+
+- name: DEBUG Walid added lsblk command
+  command: lsblk
+
+- name: DEBUG Walid added mount command
+  command: mount
+
+- name: DEBUG Walid added findmnt command
+  command: findmnt
+##-----------------------------------------
      
 # not using docker_image module of ansible since that requires docker-py package to be installed on the atomic host
 - name: pull pbench-agent from dockerhub

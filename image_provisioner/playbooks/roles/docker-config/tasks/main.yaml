@@ -39,20 +39,19 @@
   when: atomic | default(False) | bool
 
 - block:
-##   - name: create overlay2 physical volume
-##     command: pvcreate -f {{ docker_storage_device }}
-##
-##   - name: create overlay2 volume group
-##     command: vgcreate {{ docker_storage_vgname }}  {{ docker_storage_device }}
-##
-##   - name: create overlay2 logical volume
-##     command: lvcreate --name lvol0 --extents 90%FREE {{ docker_storage_vgname }}
-##
+   - name: create overlay2 physical volume
+     command: pvcreate -f {{ docker_storage_device }}
+
+   - name: create overlay2 volume group
+     command: vgcreate {{ docker_storage_vgname }}  {{ docker_storage_device }}
+
+   - name: create overlay2 logical volume
+     command: lvcreate --name lvol0 --extents 90%FREE {{ docker_storage_vgname }}
+
    - name: format the partition
      filesystem:
        fstype: xfs
-##       dev: "/dev/mapper/{{ docker_storage_vgname }}-lvol0"
-       dev: "{{ docker_storage_device }}"
+       dev: "/dev/mapper/{{ docker_storage_vgname }}-lvol0"
 
    - name: set docker_storage_mount_path if empty or undefined
      set_fact:
@@ -62,9 +61,23 @@
    - name: update fstab
      lineinfile:
        path: /etc/fstab
-##       line: "/dev/mapper/{{ docker_storage_vgname }}-lvol0 {{ docker_storage_mount_path }}                    xfs   defaults        0 0"
-       line: "{{ docker_storage_device }} {{ docker_storage_mount_path }}                    xfs   defaults        0 0"
+       line: "/dev/mapper/{{ docker_storage_vgname }}-lvol0 {{ docker_storage_mount_path }}                    xfs   defaults        0 0"
        insertafter: EOF
+
+##--- walid added more debugs: ---------------------
+   - name: DEBUG Walid added cat /etc/fstab command
+     command: cat /etc/fstab
+
+   - name: DEBUG Walid added lsblk command
+     command: lsblk
+
+   - name: DEBUG Walid added mount command
+     command: mount
+
+   - name: DEBUG Walid added findmnt command
+     command: findmnt
+##-----------------------------------------
+
   when: docker_storage_driver == "overlay2" and not atomic | default(False) | bool
   
 - name: check that docker-storage has been deleted
@@ -77,6 +90,20 @@
     path: /etc/sysconfig/docker-storage
     state: absent
   when: ds_config.stat.exists == True
+
+##--- walid added more debugs: ---------------------
+- name: DEBUG Walid added cat /etc/fstab command
+  command: cat /etc/fstab
+
+- name: DEBUG Walid added lsblk command
+  command: lsblk
+
+- name: DEBUG Walid added mount command
+  command: mount
+
+- name: DEBUG Walid added findmnt command
+  command: findmnt
+##-----------------------------------------
 
 - block:
    - name: set container_root_lv_mount_path if empty or undefined
@@ -104,13 +131,40 @@
   when: not atomic | default(False)
 
 - block:
+
+##--- walid added more debugs: ---------------------
+   - name: DEBUG Walid added cat /etc/fstab command
+     command: cat /etc/fstab
+
+   - name: DEBUG Walid added lsblk command
+     command: lsblk
+
+   - name: DEBUG Walid added mount command
+     command: mount
+
+   - name: DEBUG Walid added findmnt command
+     command: findmnt
+##-----------------------------------------
+
    - name: restart machine
-##   shell: sleep 2 && shutdown -r now "Ansible updates triggered"
-## increase sleep time from 2 seconds to 20 seconds
-     shell: sleep 20 && shutdown -r now "Ansible updates triggered"
+     shell: sleep 2 && shutdown -r now "Ansible updates triggered"
      async: 1
      poll: 0
      ignore_errors: true
+
+##--- walid added more debugs: ---------------------
+   - name: DEBUG Walid added cat /etc/fstab command
+     command: cat /etc/fstab
+
+   - name: DEBUG Walid added lsblk command
+     command: lsblk
+
+   - name: DEBUG Walid added mount command
+     command: mount
+
+   - name: DEBUG Walid added findmnt command
+     command: findmnt
+##-----------------------------------------
  
    - name: waiting for server to come back
      become: false
@@ -121,6 +175,20 @@
        state: started
        delay: 15
        timeout: 600
+
+##--- walid added more debugs: ---------------------
+   - name: DEBUG Walid added cat /etc/fstab command
+     command: cat /etc/fstab
+     
+   - name: DEBUG Walid added lsblk command
+     command: lsblk
+
+   - name: DEBUG Walid added mount command
+     command: mount
+
+   - name: DEBUG Walid added findmnt command
+     command: findmnt
+##-----------------------------------------
 
    - name: query running kernel version
      setup: filter='ansible_kernel'
@@ -140,8 +208,37 @@
     line: "OPTIONS='--selinux-enabled --log-opt max-size=100M --log-opt max-file=3 --signature-verification=false'"
 
 - block:
+
+##--- walid added more debugs: ---------------------
+    - name: DEBUG Walid added cat /etc/fstab command
+      command: cat /etc/fstab
+
+    - name: DEBUG Walid added lsblk command
+      command: lsblk
+
+    - name: DEBUG Walid added mount command
+      command: mount
+
+    - name: DEBUG Walid added findmnt command
+      command: findmnt
+##-----------------------------------------
+
     - name: restore default selinux security context
       command: restorecon -R {{ docker_storage_mount_path }} 
+
+##--- walid added more debugs: ---------------------
+    - name: DEBUG Walid added cat /etc/fstab command
+      command: cat /etc/fstab
+
+    - name: DEBUG Walid added lsblk command
+      command: lsblk
+        
+    - name: DEBUG Walid added mount command
+      command: mount
+
+    - name: DEBUG Walid added findmnt command
+      command: findmnt
+##-----------------------------------------
 
     - name: autorelabel
       file:
@@ -163,6 +260,21 @@
         state: started
         delay: 15
         timeout: 600
+
+##--- walid added more debugs: ---------------------
+    - name: DEBUG Walid added cat /etc/fstab command
+      command: cat /etc/fstab
+        
+    - name: DEBUG Walid added lsblk command
+      command: lsblk
+        
+    - name: DEBUG Walid added mount command
+      command: mount
+      
+    - name: DEBUG Walid added findmnt command
+      command: findmnt
+##-----------------------------------------
+
   when: docker_storage_driver == "overlay2" and not atomic | default(False) | bool 
  
 - name: enable docker service and start it
