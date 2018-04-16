@@ -12,6 +12,8 @@
 ## on 3.10.0-0.20.0 puddle, package "atomic-openshift-utils" was removed from puddle repo aos.repo:
 ## https://github.com/openshift/openshift-ansible/blob/master/openshift-ansible.spec#L188
 ##    - atomic-openshift-utils
+## replacing it with atomic-openshift pkg
+    - atomic-openshift
     - atomic-openshift-clients
     - atomic-openshift-clients-redistributable
     - atomic-openshift-dockerregistry
