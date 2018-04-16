@@ -282,3 +282,18 @@
     name: docker
     state: started
     enabled: yes
+
+##--- walid added more debugs: ---------------------
+- name: DEBUG Walid added cat /etc/fstab command
+  command: cat /etc/fstab
+
+- name: DEBUG Walid added lsblk command
+  command: lsblk
+
+- name: DEBUG Walid added mount command
+  command: mount
+
+- name: DEBUG Walid added findmnt command
+  command: findmnt
+##-----------------------------------------
+
