@@ -7,7 +7,9 @@
 - block:
   - name: download aos-ansible tarball
     get_url:
-      url: https://api.github.com/repos/openshift/aos-ansible/tarball/master
+##      url: https://api.github.com/repos/openshift/aos-ansible/tarball/master
+## picking up wabouhamad changes from branch "fix_image_name_backward_compat_3.10"
+      url: https://api.github.com/repos/wabouhamad/aos-ansible/tarball/fix_image_name_backward_compat_3.10
       dest: /root/aos-ansible.tar.gz
       headers: 'Authorization:token {{ github_token }},Accept:application/vnd.github.v3.raw'
 
