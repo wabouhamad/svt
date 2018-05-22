@@ -59,17 +59,17 @@
     - { role: os-kickstart }
     - { role: clone-repos, when: not atomic | default(False) | bool }
     - { role: docker-config }
-    - { role: cri-o, when: crio | default(False) | bool }
-    - { role: multipath-blacklist, when: multipath_blacklist | default(False) | bool }
-    - { role: pbench-config, when: not atomic | default(False) | bool }
-    - { role: aos-ansible }
-    - { role: ansible-update, when: not atomic | default(False) | bool }
-    - { role: openshift-package-install, when: not atomic | default(False) | bool }
-    - { role: pbench-kickstart }
-    - { role: collectd-install }
-    - { role: journald-config }
-    - { role: seal-image, when: not atomic | default(False) | bool }
-    - { role: clean-env, when: atomic | default(False) | bool }
+#    - { role: cri-o, when: crio | default(False) | bool }
+#    - { role: multipath-blacklist, when: multipath_blacklist | default(False) | bool }
+#    - { role: pbench-config, when: not atomic | default(False) | bool }
+#    - { role: aos-ansible }
+#    - { role: ansible-update, when: not atomic | default(False) | bool }
+#    - { role: openshift-package-install, when: not atomic | default(False) | bool }
+#    - { role: pbench-kickstart }
+#    - { role: collectd-install }
+#    - { role: journald-config }
+#    - { role: seal-image, when: not atomic | default(False) | bool }
+#    - { role: clean-env, when: atomic | default(False) | bool }
 
 - hosts: localhost
   connection: local
