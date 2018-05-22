@@ -5,7 +5,8 @@
     yum: 
       name: '*' 
       state: latest
-      exclude: redhat-release*,initscripts*
+#      exclude: redhat-release*,initscripts*
+      exclude: redhat-release*,initscripts*,kernel*
 
   - name: yum update redhat-release-server
     yum:
