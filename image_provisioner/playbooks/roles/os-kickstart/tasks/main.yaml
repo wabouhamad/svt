@@ -6,7 +6,7 @@
       name: '*' 
       state: latest
 #      exclude: redhat-release*,initscripts*
-      exclude: redhat-release*,initscripts*,kernel*
+      exclude: redhat-release*,initscripts*,kernel*,selinux-policy*
 
   - name: yum update redhat-release-server
     yum:
