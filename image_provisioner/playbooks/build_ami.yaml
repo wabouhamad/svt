@@ -90,25 +90,3 @@
       ami_name:  ocp-{{ openshift_version }}-{{ ami_type }}-gold
     when: extra_tags is not defined or extra_tags == ""
 
-  - name: bundle ami
-    action: 
-      module: ec2_ami
-      aws_access_key: "{{ aws_access_key }}"
-      aws_secret_key: "{{ aws_secret_key }}"
-      instance_id: "{{ ami_instance.tagged_instances.0.id }}"
-      region: "{{ region }}"
-      state: present
-      description: This was provisioned {{ ansible_date_time.iso8601 }}
-      name: "{{ ami_name }}"
-      wait: yes
-    register: amioutput
-
-  - name: terminate temporary instance
-    action:
-      module: ec2
-      aws_access_key: "{{ aws_access_key }}"
-      aws_secret_key: "{{ aws_secret_key }}"
-      state: absent
-      region: "{{ region }}"
-      instance_ids: "{{ ami_instance.tagged_instances.0.id }}"
-
