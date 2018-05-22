@@ -33,8 +33,8 @@
       - hwloc
       - iotop
       - iptables-services
-      - kernel
-      - kernel-devel
+#      - kernel
+#      - kernel-devel
       - ltrace
       - mailx
       - maven
