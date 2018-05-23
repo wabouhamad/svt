@@ -6,7 +6,8 @@
       name: '*' 
       state: latest
 #      exclude: redhat-release*,initscripts*
-      exclude: redhat-release*,initscripts*,kernel*,selinux-policy*
+#      exclude: redhat-release*,initscripts*,kernel*,selinux-policy*
+      exclude: redhat-release*,initscripts*,selinux-policy*
 
   - name: yum update redhat-release-server
     yum:
@@ -34,8 +35,8 @@
       - hwloc
       - iotop
       - iptables-services
-#      - kernel
-#      - kernel-devel
+      - kernel
+      - kernel-devel
       - ltrace
       - mailx
       - maven
