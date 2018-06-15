@@ -4,6 +4,12 @@
   ignore_errors: true
   when: not atomic | default(False) | bool 
 
+## walid added to remove the rhui-client pkg due to 401 Unauthorized errors
+- name: Walid added this to remove the rh-amazon-rhui-client pkg
+  yum:
+    name: rh-amazon-rhui-client
+    state: absent
+
 - block:
   - name: download aos-ansible tarball
     get_url:
