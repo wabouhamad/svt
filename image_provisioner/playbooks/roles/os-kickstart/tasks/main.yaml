@@ -28,7 +28,6 @@
       - findutils
       - git
       - gnuplot
-      - golang
       - httpd-tools
       - hwloc
       - iotop
