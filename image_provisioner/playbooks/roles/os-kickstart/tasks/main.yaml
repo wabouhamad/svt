@@ -5,7 +5,9 @@
     yum: 
       name: '*' 
       state: latest
-      exclude: redhat-release*,initscripts*,microcode_ctl
+#      exclude: redhat-release*,initscripts*,microcode_ctl
+#      exclude: redhat-release*,initscripts*,kernel*,selinux-policy*,microcode_ctl
+      exclude: redhat-release*,initscripts*,selinux-policy*,microcode_ctl
  
   - name: yum update redhat-release-server
     yum:
