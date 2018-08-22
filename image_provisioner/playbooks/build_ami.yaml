@@ -44,16 +44,16 @@
 
 - hosts: localhost
   user: root
-  vars:
-    internal_image: false
+#  vars:
+#    internal_image: false
   roles:
     - { role: repo-install, when: atomic | default(False) | bool }
     - { role: clone-repos, when: atomic | default(False) | bool }
 
 - hosts: just_created
   remote_user: root
-  vars:
-    internal_image: false
+#  vars:
+#    internal_image: false
   roles:
     - { role: repo-install, when: not atomic | default(False) | bool }
     - { role: os-kickstart }

@@ -93,11 +93,16 @@
       - pbscraper
       - pbcompare
 
+## 08-21-2018:  walid added yum clean all step
+  - name: clean yum cache
+    command: yum clean all
+
   - name: install pbench internal
     yum: 
       name: pbench-agent-internal 
       state: latest
-    when: internal_image | bool
+#    when: internal_image | bool
+    when: internal_image | default(False) | bool
 
   # yum module doesn't support clean
   - name: clean yum cache
