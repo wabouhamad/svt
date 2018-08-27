@@ -26,7 +26,16 @@ reg_password={{ registry_password }}
 ## do not add the trailing slash:
 reg_openshift_prefix={{ registry_name }}/openshift3
 # Pulling s2i images from registry.access.redhat.com:
-reg_s2i_prefix=registry.access.redhat.com/openshift3
+## reg_s2i_prefix=registry.access.redhat.com/openshift3
+
+## reg_s2i_prefix=registry.access.redhat.com/openshift3
+## point to registry.redhat.io
+reg_s2i_prefix=registry.redhat.io/openshift3
+ 
+# support login to registry.redhat.io
+reg_redhat_io_login={{ registry_redhat_io_login }}
+reg_redhat_io_username={{ registry_redhat_io_username }}
+reg_redhat_io_password={{ registry_redhat_io_password }}
 
 [masters]
 {% if not atomic %}

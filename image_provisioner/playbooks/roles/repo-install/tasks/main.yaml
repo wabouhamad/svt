@@ -13,7 +13,9 @@
 - block:
   - name: download aos-ansible tarball
     get_url:
-      url: https://api.github.com/repos/openshift/aos-ansible/tarball/master
+#      url: https://api.github.com/repos/openshift/aos-ansible/tarball/master
+#      url: https://api.github.com/repos/wabouhamad/aos-ansible/tarball/remove_ose_image_not_needed_for_3.10
+      url: https://api.github.com/repos/wabouhamad/aos-ansible/tarball/login_registry_redhat.io
       dest: /root/aos-ansible.tar.gz
       headers: 'Authorization:token {{ github_token }},Accept:application/vnd.github.v3.raw'
 
@@ -33,7 +35,9 @@
           owner: root
           group: root
           mode: 0644
-        when: internal_image | bool
+## 08-26-2018: commented since getting yum update error
+##        when: internal_image | bool
+        when: not (internal_image | bool)
   
       - name: install external rhel-cdn repo
         copy:
