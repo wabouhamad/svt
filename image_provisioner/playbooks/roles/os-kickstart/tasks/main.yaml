@@ -35,7 +35,8 @@
       - hwloc
       - iotop
       - iptables-services
-      - kernel
+# walid commented kernel install for now
+#      - kernel
       - kernel-devel
       - ltrace
       - mailx
@@ -101,14 +102,14 @@
     yum: 
       name: pbench-agent-internal 
       state: latest
-#    when: internal_image | bool
-    when: internal_image | default(False) | bool
+##    when: internal_image | bool
+##    when: internal_image | default(False) | bool
 
   # yum module doesn't support clean
   - name: clean yum cache
     command: yum --enablerepo=ndokos-pbench-interim clean all 
 
-  - name: update pbench-agent to get the latest changes
+  - name: Install pbench-agent to get the latest changes
     yum: 
       name: pbench-agent 
       enablerepo: ndokos-pbench-interim

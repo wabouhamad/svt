@@ -35,9 +35,9 @@
           owner: root
           group: root
           mode: 0644
+        when: internal_image | bool
 ## 08-26-2018: commented since getting yum update error
-##        when: internal_image | bool
-        when: not (internal_image | bool)
+##        when: not (internal_image | bool)
   
       - name: install external rhel-cdn repo
         copy:
@@ -120,7 +120,7 @@
           src: ndokos-pbench-interim.repo
           dest: /etc/yum.repos.d
 ###
-      - name: copy pbench-internal repo
+      - name: copy pbench-internal repo to install pbench-agent-internal
         template:
           src: etc/yum.repos.d/pbench-internal.repo.j2
           dest: /etc/yum.repos.d/pbench-internal.repo
